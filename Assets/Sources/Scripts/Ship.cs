@@ -6,13 +6,15 @@ public abstract class Ship : MonoBehaviour, IDamagable
     [SerializeField] private int _healthValue;
 
     private Health _health;
+    private IUnitSounds _unitSounds;
 
     public event Action Died;
 
-    public virtual void Init()
+    public void Init(Sounds sounds)
     {
         _health = new Health(_healthValue);
         _health.HealthChanged += OnHealthChanged;
+        _unitSounds = sounds;
     }
 
     private void OnDisable()
@@ -29,5 +31,6 @@ public abstract class Ship : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         _health.TakeDamage(damage);
+        _unitSounds.PlayHit();
     }
 }

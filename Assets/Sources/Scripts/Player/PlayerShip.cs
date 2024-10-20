@@ -5,28 +5,29 @@ public class PlayerShip : Ship
 {
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private Sounds _sounds;
     [SerializeField] private float _speed;
 
     private Rigidbody2D _rigidbody;
     private Movement _movement;
 
-    public override void Init()
+    public void Init()
     {
-        base.Init();
+        Init(_sounds);
+        _weapon.Init(_sounds);
         _rigidbody = GetComponent<Rigidbody2D>();
         _movement = new Movement(_rigidbody, _speed);
-        _weapon.Init();
-    }
+	}
 
-    private void OnEnable()
+	private void OnEnable()
     {
-        _playerInput.Shooted += OnShooted;
-    }
+        _playerInput.Shooted += OnShooted;;
+	}
 
     private void OnDisable()
     {
         _playerInput.Shooted -= OnShooted;
-    }
+	}
 
     private void FixedUpdate()
     {

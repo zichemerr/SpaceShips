@@ -17,17 +17,17 @@ public class Bullet : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _movement = new Movement(_rigidbody, _speed);
         _damage = damage;
-    }
+	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
         if (collision.TryGetComponent(out IDamagable damagable))
             damagable.TakeDamage(_damage);
 
         Disable();
-    }
+	}
 
-    public void Enable(Transform newTransform)
+	public void Enable(Transform newTransform)
     {
         transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
         gameObject.SetActive(true);

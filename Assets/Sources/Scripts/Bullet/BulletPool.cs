@@ -8,7 +8,7 @@ public class BulletPool : MonoBehaviour
 
     private Queue<Bullet> _pool;
 
-    public void Init()
+    private void Awake()
     {
         _pool = new Queue<Bullet>();
 
